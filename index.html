@@ -2,46 +2,61 @@
 <html>
 <head>
 <title>CICD Project</title>
-<link href="C:\Users\ayish\Documents\gen_grad_cloud_project\Gen_CICD _website_project\styling.css" rel = "stylesheet" type = "text/css">
-<!link rel="stylesheet" href="styling.css">
+<link href="C:\Users\ayish\Documents\gen_grad_cloud_project\Gen_CICD _website_project\styling.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<h1 style = "color: red">Generation Graduate Project</h1>
-<p style="color:teal">Welcome to my site.This is my project where I will build a CICD pipeline in AWS.</p>
+<h1 style="color: red">Generation Graduate Project</h1>
+<p style="color: teal">Welcome to my site. This is my project where I will build a CICD pipeline in AWS.</p>
 
-<form action=example-server.com">
+<form id="contactForm">
     <fieldset>
-      <legend>Contact me</legend>
-      <div class="form-control">
-        <label for="name">Name</label>
-        <input type="name" id="name" placeholder="Enter your name" required />
-      </div>
+        <legend>Contact me</legend>
+        <div class="form-control">
+            <label for="name">Name</label>
+            <input type="name" id="name" placeholder="Enter your name" required />
+        </div>
 
-      <div class="form-control">
-        <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          placeholder="Enter your email"
-          required
-        />
-      </div>
-
-      <div class="form-control">
-        <label for="message">Message</label>
-        <textarea
-          id="message"
-          cols="30"
-          rows="10"
-          placeholder="Enter your message"
-          required
-        ></textarea>
-      </div>
-      <input type="submit" value="Send" class="submit-btn" />
+        <div class="form-control">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            />
+        </div>
+        
+        <!-- Add submit button -->
+        <button type="button" id="submitButton">Submit</button>
     </fieldset>
 </form>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("submitButton").addEventListener("click", function() {
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        
+        // Make an AJAX request to the Lambda function or Google Cloud function endpoint
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "YOUR_FUNCTION_ENDPOINT_URL", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Handle successful response
+                    alert("Submission successful!");
+                } else {
+                    // Handle error response
+                    alert("Error: " + xhr.responseText);
+                }
+            }
+        };
+        xhr.send(JSON.stringify({ name: name, email: email }));
+    });
+});
+</script>
 
 </body>
 </html>
